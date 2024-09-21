@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="https://script.google.com/a/macros/isuremedia.com/s/AKfycbznD5B-lcKC6gqrAEFUG2uTmPWVSpuoRHNrqgEQlGz2qG_mirHwhWi8486ScPPyAHMLoQ/exec" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+        
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" required><br><br>
+        
+        <input type="submit" value="Submit">
+    </form>
+
+    <h2>Submitted Data</h2>
+    <table id="dataTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+    </table>
+    <script>
+        function fetchAndDisplayData() {
+
+            const script = document.createElement('script');
+
+            script.src = 'https://script.google.com/a/macros/isuremedia.com/s/AKfycbznD5B-lcKC6gqrAEFUG2uTmPWVSpuoRHNrqgEQlGz2qG_mirHwhWi8486ScPPyAHMLoQ/exec';
+            document.body.appendChild(script);   
+            
+        }
+
+        function handleJSONPResponse(data) {
+                    const tableBody = document.getElementById('tableBody');
+
+                    tableBody.innerHTML = '';
+
+                    data.forEach(row => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td>${row.name}</td>
+                            <td>${row.email}</td>
+                            <td>${row.phone}</td>
+                        `;
+                        tableBody.appendChild(tr);
+                    })
+               
+        }
+
+        fetchAndDisplayData();
+
+        setInterval(fetchAndDisplayData, 10000);
+        </script>
+</body>
+</html>
